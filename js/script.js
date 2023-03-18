@@ -76,19 +76,27 @@ function end() {
 let turn = 0
 
 function computerPlayEasy() {
-    let line = Math.floor(Math.random() * 3)
-    let column = Math.floor(Math.random() * 3)
-    if (matrix[line][column].innerHTML == "") {
-        matrix[line][column].innerHTML = "O"
-        matrix[line][column].disabled = true
+    arrSegundaJogado = [button1, button3, button7, button9]
+    let lin = Math.floor(Math.random() * 4)
+    console.log(lin);
+    console.log(arrSegundaJogado[lin].innerHTML );
+    if (button1.innerHTML != '' && button3.innerHTML != '' && button7.innerHTML != '' && button9.innerHTML !== '') {
+        let line = Math.floor(Math.random() * 3)
+        let column = Math.floor(Math.random() * 3)
+        if (matrix[line][column].innerHTML == "") {
+            matrix[line][column].innerHTML = "O"
+            matrix[line][column].disabled = true
+        }
     } else {
-        computerPlayEasy()
+        arrSegundaJogado[lin].innerHTML !== ''
+            arrSegundaJogado[lin].innerHTML = "O"
+            arrSegundaJogado[lin].disabled = true
     }
-}
 
+}
 function computerPlayHard() {
-    
-    
+
+
     for (let i = 0; i < matrix.length; i++) {
         for (let j = 0; j < matrix[0].length; j++) {
             if (matrix[i][j].innerHTML == "") {
@@ -119,7 +127,7 @@ function computerPlayHard() {
     }
 
 
-    if(button5.innerHTML == ''){
+    if (button5.innerHTML == '') {
         button5.innerHTML = "O"
         button5.disabled = true
     } else {
@@ -169,13 +177,13 @@ const btnjogar = () => {
     button8.disabled = false
     button9.disabled = false
 
-    button1.innerHTML =''
-    button2.innerHTML =''
-    button3.innerHTML =''
-    button4.innerHTML =''
-    button5.innerHTML =''
-    button6.innerHTML =''
-    button7.innerHTML =''
-    button8.innerHTML =''
-    button9.innerHTML =''
+    button1.innerHTML = ''
+    button2.innerHTML = ''
+    button3.innerHTML = ''
+    button4.innerHTML = ''
+    button5.innerHTML = ''
+    button6.innerHTML = ''
+    button7.innerHTML = ''
+    button8.innerHTML = ''
+    button9.innerHTML = ''
 }
