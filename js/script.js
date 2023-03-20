@@ -79,21 +79,58 @@ function computerPlayEasy() {
     arrSegundaJogado = [button1, button3, button7, button9]
     let lin = Math.floor(Math.random() * 4)
     console.log(lin);
-    console.log(arrSegundaJogado[lin].innerHTML );
+    console.log(arrSegundaJogado[lin].innerHTML);
     if (button1.innerHTML != '' && button3.innerHTML != '' && button7.innerHTML != '' && button9.innerHTML !== '') {
         let line = Math.floor(Math.random() * 3)
         let column = Math.floor(Math.random() * 3)
         if (matrix[line][column].innerHTML == "") {
             matrix[line][column].innerHTML = "O"
             matrix[line][column].disabled = true
+        } else {
+            computerPlayEasy()
         }
     } else {
-        arrSegundaJogado[lin].innerHTML !== ''
+        if (arrSegundaJogado[lin].innerHTML == "X" || arrSegundaJogado[lin].innerHTML == "O") {
+            computerPlayEasy()
+        } else {
+            arrSegundaJogado[lin].innerHTML !== ''
             arrSegundaJogado[lin].innerHTML = "O"
             arrSegundaJogado[lin].disabled = true
+
+        }
     }
 
 }
+
+
+function computerPlayEasyX() {
+    arrSegundaJogado = [button1, button3, button7, button9]
+    let lin = Math.floor(Math.random() * 4)
+    console.log(lin);
+    console.log(arrSegundaJogado[lin].innerHTML);
+    if (button1.innerHTML != '' && button3.innerHTML != '' && button7.innerHTML != '' && button9.innerHTML !== '') {
+        let line = Math.floor(Math.random() * 3)
+        let column = Math.floor(Math.random() * 3)
+        if (matrix[line][column].innerHTML == "") {
+            matrix[line][column].innerHTML = "X"
+            matrix[line][column].disabled = true
+        } else {
+            computerPlayEasyX()
+        }
+    } else {
+        if (arrSegundaJogado[lin].innerHTML == "X" || arrSegundaJogado[lin].innerHTML == "O") {
+            computerPlayEasyX()
+        } else {
+            arrSegundaJogado[lin].innerHTML !== ''
+            arrSegundaJogado[lin].innerHTML = "X"
+            arrSegundaJogado[lin].disabled = true
+
+        }
+    }
+
+}
+
+
 function computerPlayHard() {
 
 
@@ -132,6 +169,48 @@ function computerPlayHard() {
         button5.disabled = true
     } else {
         computerPlayEasy()
+    }
+}
+
+
+function computerPlayHardX() {
+
+
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[0].length; j++) {
+            if (matrix[i][j].innerHTML == "") {
+                matrix[i][j].innerHTML = "X"
+                if (checkWin()) {
+                    matrix[i][j].disabled = true
+                    return
+                } else {
+                    matrix[i][j].innerHTML = ""
+                }
+            }
+        }
+    }
+
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[0].length; j++) {
+            if (matrix[i][j].innerHTML == "") {
+                matrix[i][j].innerHTML = "O"
+                if (checkWin()) {
+                    matrix[i][j].innerHTML = "X"
+                    matrix[i][j].disabled = true
+                    return
+                } else {
+                    matrix[i][j].innerHTML = ""
+                }
+            }
+        }
+    }
+
+
+    if (button5.innerHTML == '') {
+        button5.innerHTML = "X"
+        button5.disabled = true
+    } else {
+        computerPlayEasyX()
     }
 }
 
@@ -186,4 +265,19 @@ const btnjogar = () => {
     button7.innerHTML = ''
     button8.innerHTML = ''
     button9.innerHTML = ''
+}
+
+const MvsM = () =>{
+    if (turn % 2 === 0) {
+        computerPlayHardX()
+    } else {
+        computerPlayHard()
+    }
+    turn++
+    if (checkWin()) {
+        alert(`Player ${turn % 2 === 0 ? "O" : "X"} wins!`)
+        end()
+    } else if (checkDraw()) {
+        alert("Empate")
+    }
 }
